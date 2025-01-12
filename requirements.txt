@@ -5,6 +5,8 @@ matplotlib
 scikit-learn
 catboost
 xgboost
-cudf
-cuml
-#-e .
+#cudf
+#cuml
+flask
+#pipelines
+-e .

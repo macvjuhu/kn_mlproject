@@ -6,7 +6,7 @@ import pandas as pd
 import pickle
 from sklearn.metrics import r2_score
 from sklearn.model_selection import GridSearchCV
-from cuml.model_selection import GridSearchCV as cuml_GridSearchCV
+
 
 from common.logger import logging as logger
 from common.exception import CustomException
@@ -32,6 +32,7 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, param):
         def evaluate_model(model_name, model, para):
             logger.info(f"Evaluating model {model_name} ...")
             if 'cuml' in sys.modules:
+                from cuml.model_selection import GridSearchCV as cuml_GridSearchCV
                 logger.info("Using cuML for GridSearchCV")
                 gs = cuml_GridSearchCV(model, para, cv=3, n_jobs=2, pre_dispatch='2*n_jobs')
             else:
@@ -41,7 +42,9 @@ def evaluate_models(X_train, y_train, X_test, y_test, models, param):
             model.set_params(**gs.best_params_)
             model.fit(X_train, y_train)
 
-            y_train_pred = model.predict(X_train)
+            logger.info(f"Model {model_name} trained successfully")
+
+            #y_train_pred = model.predict(X_train)
             y_test_pred = model.predict(X_test)
             test_model_score = r2_score(y_test, y_test_pred)
 
