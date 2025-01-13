@@ -1,15 +1,18 @@
 from flask import Flask,request,render_template
 import numpy as np
 import pandas as pd
-
 from sklearn.preprocessing import StandardScaler
-from pipelines.predict_pipeline import CustomData,PredictPipeline
 import logging
 
 import sys
+sys.path.append("./src")    
 print(sys.path)
 
-#"""
+from pipelines.predict_pipeline import CustomData,PredictPipeline
+
+
+
+
 from logging.config import dictConfig
 
 dictConfig({
@@ -27,7 +30,7 @@ dictConfig({
         'handlers': ['wsgi']
     }
 })
-#"""
+
 
 application=Flask(__name__)
 #application=Flask(__name__, template_folder="""C:/work/code/ai-learning/kn_mlprojects/templates""")
