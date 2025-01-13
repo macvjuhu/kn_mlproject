@@ -87,7 +87,7 @@ jobs:
 
       - name: Stop and remove container if running
         run: |
-          docker ps -q --filter "name=mltest" | grep -q . && docker stop mltest && docker rm -fv mltest
+          docker ps -q --filter "name=mltest" | xargs -r docker stop && docker ps -a -q --filter "name=mltest" | xargs -r docker rm
 
       - name: Clean previous images and containers
         run: |
