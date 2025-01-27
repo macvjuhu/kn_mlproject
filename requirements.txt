@@ -9,4 +9,5 @@ xgboost
 #cuml
 flask
 #pipelines
+pickle
 -e .
