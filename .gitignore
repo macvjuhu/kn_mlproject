@@ -1,3 +1,6 @@
+# macOs specific
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -164,4 +167,14 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Terraform specific
+.terraform/
+.terraform.lock*
+.terraform.tfstate
+.terraform.tfstate.backup
+secrets.tfvars
+
+
 #project specific ignores
+
+
