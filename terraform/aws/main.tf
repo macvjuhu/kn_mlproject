@@ -199,6 +199,27 @@ resource "aws_instance" "studentperf" {
     volume_size = 20
     volume_type = "gp2"
   }
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+              sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              sudo apt-get update
+              sudo apt-get install -y docker-ce
+              sudo usermod -aG docker ubuntu
+              #install github runner agent
+              # Create a folder
+              mkdir actions-runner && cd actions-runner
+              # Download the latest runner package
+              curl -o actions-runner-linux-x64-2.322.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.322.0/actions-runner-linux-x64-2.322.0.tar.gz
+              # Optional: Validate the hash
+              echo "b13b784808359f31bc79b08a191f5f83757852957dd8fe3dbfcc38202ccf5768  actions-runner-linux-x64-2.322.0.tar.gz" | shasum -a 256 -c
+              # Extract the installer
+              tar xzf ./actions-runner-linux-x64-2.322.0.tar.gz
+              ./config.sh --url https://github.com/macvjuhu/kn_mlproject --token ${var.github_runner_token}
+              nohup ./run.sh > nohup.out 2>&1 &
+              EOF
   tags = {
     Name = "studentperf"
   }

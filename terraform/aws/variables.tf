@@ -1,3 +1,9 @@
+variable "region" {
+  description = "The AWS region to create resources in"
+  type        = string
+  default     = "us-east-1"
+}
+
 variable "ami_id" {
   description = "The AMI ID to use for the instance"
   type        = string
@@ -17,6 +23,11 @@ variable "keypair_name" {
 
 variable "my_public_subnet" {
   description = "The public network to allow access to the instance"
+  type        = string
+}
+
+variable "github_runner_token" {
+  description = "The GitHub runner token"
   type        = string
 }
 
