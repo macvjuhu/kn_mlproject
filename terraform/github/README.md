@@ -4,7 +4,9 @@
 ```
 #!/bin/zsh
 
-export TF_VAR_github_runner_token="your-token"
+export TF_VAR_aws_access_key_id = "your-aws-access-key"
+export TF_VAR_aws_secret_access_key = "your-aws-secret"
+export TF_VAR_github_token = "your-github-token"
 
 ```
 - Source secrets.env in your terminal before executing terraform commands
