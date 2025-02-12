@@ -170,8 +170,8 @@ cython_debug/
 # Terraform specific
 .terraform/
 .terraform.lock*
-.terraform.tfstate
-.terraform.tfstate.backup
+terraform.tfstate*
+
 
 #secret files
 secrets.env
